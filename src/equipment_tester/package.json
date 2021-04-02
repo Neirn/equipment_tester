@@ -1,0 +1,11 @@
+{
+  "name": "equipment_tester",
+  "version": "1.0.0",
+  "description": "",
+  "main": "oot_equipment_tester.js",
+  "keywords": [],
+  "author": "Neirn",
+  "additional_credits": "OoTO team",
+  "license": "GPLv3",
+  "core": "OcarinaofTime"
+}
