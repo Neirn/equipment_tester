@@ -135,7 +135,9 @@ class oot_equipment_tester implements IPlugin {
                 finalBuf = Buffer.concat([finalBuf, Buffer.alloc(0x10 - padding)]);
             }
 
-            let nameBuf = Buffer.alloc(0x20);
+            if (!name)
+                name = "";
+            let nameBuf = Buffer.alloc(0x10 + 0x10 * (name.length / 0x10 + 1));
             nameBuf.write("EQUIPMENTNAME");
             if (name) {
                 nameBuf.write(name, 0x10);
@@ -196,10 +198,8 @@ class oot_equipment_tester implements IPlugin {
                 this.ModLoader.utils.setTimeoutFrames(() => {
 
                     let name = this.nameBox[0];
-                    if (name.length > 0x10) {
-                        // this.errorTxt[0] = "Equipment name too long! (Limit is 16 characters)";
-                        this.ModLoader.logger.error("Equipment name too long! (Limit is 16 characters)");
-                        name = "";
+                    if (name.length >= 0x30) {
+                        this.ModLoader.logger.error("Equipment name too long");
                     }
                     else if (name.length === 0) {
                         name = "";

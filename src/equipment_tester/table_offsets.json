@@ -18,7 +18,19 @@
         "Ocarina.2": "0x5188",
         "Hammer": "0x5170",
         "FPS.Forearm.L": "0x51E8",
-        "FPS.Hand.L": "0x51F0"
+        "FPS.Forearm.R": "0x51F8",
+        "FPS.Hand.L": "0x51F0",
+        "FPS.Hand.R": "0x5200",
+        "Foot.2.L": "0x51C8",
+        "Foot.2.R": "0x51D0",
+        "Foot.3.L": "0x51D8",
+        "Foot.3.R": "0x51E0",
+        "Gauntlet.Forearm.L": "0x5198",
+        "Gauntlet.Hand.L": "0x51A0",
+        "Gauntlet.Fist.L": "0x51A8",
+        "Gauntlet.Forearm.R": "0x51B0",
+        "Gauntlet.Hand.R": "0x51B8",
+        "Gauntlet.Fist.R": "0x51C0"
     },
     "child": {
         "Blade.1": "0x5188",
