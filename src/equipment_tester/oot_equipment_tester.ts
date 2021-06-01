@@ -63,7 +63,7 @@ class oot_equipment_tester implements IPlugin {
     preinit(): void {
     }
     init(): void {
-        this.aliasTable = readJSONSync(join(__dirname, 'table_offsets.json'));
+        this.aliasTable = readJSONSync(join(__dirname, 'LUT_to_zzmanifest_map.json'));
 
         this.game = (this.ModLoader.isModLoaded("OoTOnline")) ? "OOT" : "MM";
     }
@@ -85,7 +85,7 @@ class oot_equipment_tester implements IPlugin {
             buf = readFileSync(file);
         } catch (error) {
             this.ModLoader.logger.error(error.message);
-            this.errorTxt[0] = "Error reading equipment zobj";
+            this.ModLoader.logger.error("Error reading equipment zobj");
             return Buffer.alloc(1);
         }
 
@@ -122,7 +122,7 @@ class oot_equipment_tester implements IPlugin {
                     Buffer.alloc(key.length).copy(buf, i);
 
                     // @ts-ignore: ignore "string cannot be used to index this type"
-                    manifest[this.game][manifestForm][manifestIdx.toString()] = this.aliasTable[manifestForm][key];
+                    manifest["OOT"][manifestForm][manifestIdx.toString()] = this.aliasTable[manifestForm][key];
 
                     let de = Buffer.alloc(0x8);
                     de.writeUInt32BE(0xDE010000, 0);
@@ -135,7 +135,7 @@ class oot_equipment_tester implements IPlugin {
                 }
             }
 
-            // this.ModLoader.logger.debug(JSON.stringify(manifest));
+            this.ModLoader.logger.debug(JSON.stringify(manifest));
 
             ml64_header.writeUInt32BE(DECommands.length, 0x0C);
 
@@ -169,6 +169,7 @@ class oot_equipment_tester implements IPlugin {
 
             return finalBuf;
         } catch (error) {
+            this.ModLoader.logger.error("Error creating equipment zobj")
             this.ModLoader.logger.error(error.message);
             return Buffer.alloc(1);
         }
