@@ -40,7 +40,21 @@ class oot_equipment_tester implements IPlugin {
     filepathBox = [""];
     nameBox = [""];
     currentCat = [0];
-    categories = ["Deku Shield", "Kokiri Sword", "Master Sword", "Bow", "Ocarina of Time", "Fairy Ocarina", "Mirror Shield", "Hookshot", "Biggoron Sword", "Bottle"];
+    categories = [
+        "Kokiri Sword",
+        "Master Sword",
+        "Biggoron Sword",
+        "Deku Shield",
+        "Hylian Shield",
+        "Mirror Shield",
+        "Slingshot",
+        "Bow",
+        "Ocarina of Time",
+        "Fairy Ocarina",
+        "Hookshot",
+        "Boomerang",
+        "Deku Stick"
+    ];
     aliasTable!: Record<string, Record<string, string>>;
     errorTxt = [""];
     form: Form = Form.ADULT;
@@ -93,7 +107,7 @@ class oot_equipment_tester implements IPlugin {
                     "fd": {}
                 }
             };
-            let manifestForm: Form = (this.form === Form.ADULT) ? Form.ADULT : Form.CHILD;
+            let manifestForm: Form = this.form;
             let DECommands: Array<Buffer> = new Array();
 
             let manifestIdx = 0;
@@ -107,7 +121,8 @@ class oot_equipment_tester implements IPlugin {
                     /* Remove manifest entry after it's been found */
                     Buffer.alloc(key.length).copy(buf, i);
 
-                    manifest["OOT"][manifestForm][manifestIdx.toString()] = this.aliasTable[manifestForm][key];
+                    // @ts-ignore: ignore "string cannot be used to index this type"
+                    manifest[this.game][manifestForm][manifestIdx.toString()] = this.aliasTable[manifestForm][key];
 
                     let de = Buffer.alloc(0x8);
                     de.writeUInt32BE(0xDE010000, 0);
@@ -227,7 +242,7 @@ class oot_equipment_tester implements IPlugin {
 
         if (this.ModLoader.ImGui.beginMainMenuBar()) {
 
-            if(this.ModLoader.ImGui.beginMenu("Mods")) {
+            if (this.ModLoader.ImGui.beginMenu("Mods")) {
                 if (this.ModLoader.ImGui.menuItem("Equipment Tester")) {
                     this.isWindowOpen[0] = true;
                 }
