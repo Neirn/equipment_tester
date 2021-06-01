@@ -4,9 +4,8 @@ import { InjectCore } from 'modloader64_api/CoreInjection';
 import { onViUpdate } from 'modloader64_api/PluginLifecycle';
 import { EventHandler, bus } from 'modloader64_api/EventHandler';
 import { Z64Online_EquipmentPak, Z64OnlineEvents } from './Z64API/OotoAPI';
-import { readJSONSync, readFileSync } from 'fs-extra';
-import { join, basename } from 'path';
-import { writeFileSync } from 'fs';
+import { readJSONSync, readFileSync, writeFileSync } from 'fs-extra';
+import { join, dirname, basename } from 'path';
 
 const enum Form {
     ADULT = "adult",
@@ -205,11 +204,13 @@ class oot_equipment_tester implements IPlugin {
                         name = "";
                     }
 
-                    let buf = this.loadEquipmentZobj(join(this.filepathBox[0]), name, this.categories[this.currentCat[0]]);
+                    let zobjPath = this.filepathBox[0];
+
+                    let buf = this.loadEquipmentZobj(join(zobjPath, name, this.categories[this.currentCat[0]]));
 
                     if (buf.byteLength > 1) {
                         try {
-                            writeFileSync(basename(join(this.filepathBox[0]), (this.filepathBox[0].indexOf(".zobj") === -1) ? ".zobj" : ""), buf);
+                            writeFileSync(join(dirname(zobjPath), (basename(zobjPath, '.zobj') + '_converted.zobj')), buf);
                             this.ModLoader.logger.debug("Saved equipment zobj!");
                             this.errorTxt[0] = "";
                         } catch (error) {
