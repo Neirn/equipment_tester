@@ -5,7 +5,7 @@ import { onViUpdate } from 'modloader64_api/PluginLifecycle';
 import { EventHandler, bus } from 'modloader64_api/EventHandler';
 import { Z64Online_EquipmentPak, Z64OnlineEvents } from './Z64API/OotoAPI';
 import { readJSONSync, readFileSync, writeFileSync } from 'fs-extra';
-import { join, dirname, basename } from 'path';
+import { join, basename } from 'path';
 
 const enum Form {
     ADULT = "adult",
@@ -29,6 +29,8 @@ interface IEquipmentManifest {
         "fd": Record<string, string>
     }
 }
+
+const MAX_NAME_SIZE = 0x20;
 
 class oot_equipment_tester implements IPlugin {
 
@@ -135,7 +137,7 @@ class oot_equipment_tester implements IPlugin {
                 }
             }
 
-            this.ModLoader.logger.debug(JSON.stringify(manifest));
+            // this.ModLoader.logger.debug(JSON.stringify(manifest));
 
             ml64_header.writeUInt32BE(DECommands.length, 0x0C);
 
@@ -151,7 +153,7 @@ class oot_equipment_tester implements IPlugin {
 
             if (!name)
                 name = "";
-            let nameBuf = Buffer.alloc(0x10 + 0x10 * (name.length / 0x10 + 1));
+            let nameBuf = Buffer.alloc(0x10 + 0x10 * (Math.floor(name.length / 0x10) + 1));
             nameBuf.write("EQUIPMENTNAME");
             if (name) {
                 nameBuf.write(name, 0x10);
@@ -191,7 +193,7 @@ class oot_equipment_tester implements IPlugin {
                 this.ModLoader.utils.setTimeoutFrames(() => {
                     let equip = this.loadEquipmentZobj(join(this.filepathBox[0]));
                     if (equip.byteLength > 1) {
-                        bus.emit(Z64OnlineEvents.LOAD_EQUIPMENT_BUFFER, new Z64Online_EquipmentPak(this.filepathBox[0], equip));
+                        bus.emit(Z64OnlineEvents.LOAD_EQUIPMENT_BUFFER, new Z64Online_EquipmentPak(basename(this.filepathBox[0]), equip));
                         bus.emit(Z64OnlineEvents.REFRESH_EQUIPMENT);
                         this.ModLoader.logger.debug("Equipment pak loaded!");
                     }
@@ -213,8 +215,9 @@ class oot_equipment_tester implements IPlugin {
                 this.ModLoader.utils.setTimeoutFrames(() => {
 
                     let name = this.nameBox[0];
-                    if (name.length >= 0x30) {
+                    if (name.length >= MAX_NAME_SIZE) {
                         this.ModLoader.logger.error("Equipment name too long");
+                        return;
                     }
                     else if (name.length === 0) {
                         name = "";
@@ -222,11 +225,19 @@ class oot_equipment_tester implements IPlugin {
 
                     let zobjPath = this.filepathBox[0];
 
-                    let buf = this.loadEquipmentZobj(join(zobjPath, name, this.categories[this.currentCat[0]]));
+                    let buf = this.loadEquipmentZobj(zobjPath, name, this.categories[this.currentCat[0]]);
 
                     if (buf.byteLength > 1) {
                         try {
-                            writeFileSync(join(dirname(zobjPath), (basename(zobjPath, '.zobj') + '_converted.zobj')), buf);
+                            let filename: string;
+                            if (this.nameBox[0] === "") {
+                                filename = basename(this.filepathBox[0]);
+                            }
+                            else {
+                                filename = this.nameBox[0] + '.zobj';
+                            }
+
+                            writeFileSync('./' + filename, buf, "binary");
                             this.ModLoader.logger.debug("Saved equipment zobj!");
                             this.errorTxt[0] = "";
                         } catch (error) {
