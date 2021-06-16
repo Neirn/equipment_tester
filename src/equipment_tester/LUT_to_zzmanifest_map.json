@@ -1,0 +1,43 @@
+{
+    "adult": {
+        "Blade.2": "sword1_blade",
+        "Hilt.2": "sword1_hilt",
+        "Sheath": "sword1_sheath",
+        "Shield.3": "shield2_held",
+        "Shield.2": "shield1_held",
+        "Bow": "bow",
+        "Blade.3": "sword2_blade",
+        "Hilt.3": "sword2_hilt",
+        "Hookshot.Spike": "hookshot_spike",
+        "Hookshot": "hookshot",
+        "Ocarina.2": "ocarina_1_a",
+        "Hammer": "hammer"
+    },
+    "child": {
+        "Blade.1": "sword0_blade",
+        "Hilt.1": "sword0_hilt",
+        "Sheath": "sword0_hilt",
+        "Shield.1": "shield0_held",
+        "Shield.2": "shield1_back",
+        "Slingshot": "slingshot",
+        "DekuStick": "deku_stick",
+        "Boomerang": "boomerang",
+        "Ocarina.1": "ocarina_0",
+        "Ocarina.2": "ocarina_1_c"
+    },
+    "human": {
+
+    },
+    "deku": {
+
+    },
+    "zora": {
+        
+    },
+    "goron": {
+
+    },
+    "fd": {
+        
+    }
+}

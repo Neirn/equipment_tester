@@ -14,8 +14,8 @@ export enum Z64OnlineEvents {
   GAINED_HEART_CONTAINER = 'OotOnline:GainedHeartContainer',
   GAINED_PIECE_OF_HEART = 'OotOnline:GainedPieceOfHeart',
   MAGIC_METER_INCREASED = 'OotOnline:GainedMagicMeter',
-  CUSTOM_MODEL_APPLIED_ADULT = 'OotOnline:ApplyCustomModelAdult',
-  CUSTOM_MODEL_APPLIED_CHILD = 'OotOnline:ApplyCustomModelChild',
+  CUSTOM_MODEL_APPLIED_ADULT = 'OotOnline:ApplyCustomModelAdult', // deprecated - use CUSTOM_MODEL_LOAD_ADULT
+  CUSTOM_MODEL_APPLIED_CHILD = 'OotOnline:ApplyCustomModelChild', // deprecated - use CUSTOM_MODEL_LOAD_CHILD
   CUSTOM_MODEL_APPLIED_ANIMATIONS = 'OotOnline:ApplyCustomAnims',
   CUSTOM_MODEL_APPLIED_ICON_ADULT = 'OotOnline:ApplyCustomIconAdult',
   CUSTOM_MODEL_APPLIED_ICON_CHILD = 'OotOnline:ApplyCustomIconChild',
@@ -23,6 +23,8 @@ export enum Z64OnlineEvents {
   ON_EXTERNAL_ACTOR_SYNC_LOAD = 'OotOnline:OnExternalActorSyncLoad',
   ON_REGISTER_EMOTE = 'OotOnline:OnRegisterEmote',
   ON_LOAD_SOUND_PACK = "OotOnline:OnLoadSoundPack",
+  POST_LOADED_SOUND_LIST = "OotOnline:PostLoadedSoundList",
+  ON_SELECT_SOUND_PACK = "OotOnline:OnSelectSoundPack",
   ON_REMOTE_SOUND_PACK = "OotOnline:OnRemoteSoundPack",
   ON_REMOTE_PLAY_SOUND = "OotOnline:OnRemotePlaySound",
   CUSTOM_MODEL_LOAD_BUFFER_ADULT = "OotOnline:ApplyCustomModelAdultBuffer",
@@ -36,7 +38,18 @@ export enum Z64OnlineEvents {
   LOAD_EQUIPMENT_BUFFER = "OotOnline:LoadEquipmentBuffer",
   LOAD_EQUIPMENT_PAK = "OotOnline:LoadEquipmentPak",
   REFRESH_EQUIPMENT = "OotOnline:RefreshEquipment",
-  CLEAR_EQUIPMENT = "OotOnline:ClearEquipment"
+  CLEAR_EQUIPMENT = "OotOnline:ClearEquipment",
+  EQUIPMENT_ZOBJ_LOADED = "OotOnline:EqZobjLoad",
+  EQUIPMENT_LOAD_START = "OotOnline:EqZobjLoadStart",
+  EQUIPMENT_LOAD_END = "OotOnline:EqZobjLoadEnd",
+  DEBUG_DUMP_RAM = "OotOnline:DumpRam",
+  PUPPETS_CLEAR = "OotOnline:PuppetsClear",
+  ON_MODEL_MANAGER_READY = "OotOnline:ON_MODEL_MANAGER_READY",
+  CUSTOM_MODEL_LOAD_ADULT = "OotOnline:CUSTOM_MODEL_LOAD_ADULT",
+  CUSTOM_MODEL_LOAD_CHILD = "OotOnline:CUSTOM_MODEL_LOAD_CHILD",
+  PUPPET_AGE_CHANGED = 'OotOnline:PUPPET_AGE_CHANGED',
+  SAVE_DATA_ITEM_SET = 'OotOnline:SAVE_DATA_ITEM_SET',
+  LOCAL_MODEL_CHANGE_FINISHED = "OotOnline:LOCAL_MODEL_CHANGE_FINISHED"
 }
 
 export class RemoteSoundPlayRequest {
