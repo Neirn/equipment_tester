@@ -16,7 +16,7 @@
     "child": {
         "Blade.1": "sword0_blade",
         "Hilt.1": "sword0_hilt",
-        "Sheath": "sword0_hilt",
+        "Sheath": "sword0_sheath",
         "Shield.1": "shield0_held",
         "Shield.2": "shield1_back",
         "Slingshot": "slingshot",
