@@ -19,7 +19,8 @@
       "@equipment_tester/*": [
         "./src/equipment_tester/*"
       ]
-    }
+    },
+    "noImplicitAny": false
   },
   "include": [
     "src/**/*.ts",

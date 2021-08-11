@@ -1,0 +1,42 @@
+{
+    "adult": {
+        "Blade.2": "Master Sword Blade",
+        "Hilt.2": "Master Sword Hilt",
+        "Sheath": "Master Sword Sheath",
+        "Shield.3": "Mirror Shield",
+        "Shield.2": "Hylian Shield",
+        "Bow": "Bow",
+        "Blade.3": "Biggoron Blade",
+        "Hilt.3": "Biggoron Hilt",
+        "Hookshot.Spike": "Hookshot Spike",
+        "Hookshot": "Hookshot 3rd Person",
+        "Ocarina.2": "Ocarina of Time",
+        "Hammer": "Megaton Hammer"
+    },
+    "child": {
+        "Blade.1": "Kokiri Sword Blade",
+        "Hilt.1": "Kokiri Sword Hilt",
+        "Sheath": "Kokiri Sword Sheath",
+        "Shield.1": "Deku Shield",
+        "Slingshot": "Slingshot",
+        "DekuStick": "Deku Stick",
+        "Boomerang": "Boomerang",
+        "Ocarina.1": "Fairly Ocarina",
+        "Ocarina.2": "Ocarina of Time"
+    },
+    "human": {
+
+    },
+    "deku": {
+
+    },
+    "zora": {
+        
+    },
+    "goron": {
+
+    },
+    "fd": {
+        
+    }
+}
