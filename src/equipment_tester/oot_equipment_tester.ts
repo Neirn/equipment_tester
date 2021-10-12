@@ -122,7 +122,7 @@ class oot_equipment_tester implements IPlugin {
 
         try {
             zobj = readFileSync(zobjPath);
-        } catch (error) {
+        } catch (error: any) {
             this.ModLoader.logger.error(error.message);
             return false;
         }
@@ -220,7 +220,7 @@ class oot_equipment_tester implements IPlugin {
             finalBuf = Buffer.concat([optimized.zobj, finalBuf, nameBuf, catBuf]);
 
             return finalBuf;
-        } catch (error) {
+        } catch (error: any) {
             this.ModLoader.logger.error("Error creating equipment zobj")
             this.ModLoader.logger.error(error.message);
             return Buffer.alloc(1);
@@ -234,7 +234,7 @@ class oot_equipment_tester implements IPlugin {
 
         try {
             buf = readFileSync(file);
-        } catch (error) {
+        } catch (error: any) {
             this.ModLoader.logger.error(error.message);
             this.ModLoader.logger.error("Error reading equipment zobj");
             return Buffer.alloc(1);
@@ -266,11 +266,7 @@ class oot_equipment_tester implements IPlugin {
             for (const key in this.aliasTable[manifestForm]) {
                 let i = buf.indexOf(key);
 
-                if (i !== -1) {
-
-                    /* Biggoron sword, bow, etc fix */
-                    /* Remove manifest entry after it's been found */
-                    Buffer.alloc(key.length).copy(buf, i);
+                if (i !== -1 && buf[i + key.length + 1] === 0) {
 
                     // @ts-ignore: ignore "string cannot be used to index this type"
                     manifest["OOT"][manifestForm][manifestIdx.toString()] = this.aliasTable[manifestForm][key];
@@ -317,7 +313,7 @@ class oot_equipment_tester implements IPlugin {
             finalBuf = Buffer.concat([buf.slice(0, (off !== -1) ? off : buf.length), finalBuf, nameBuf, catBuf]);
 
             return finalBuf;
-        } catch (error) {
+        } catch (error: any) {
             this.ModLoader.logger.error("Error creating equipment zobj")
             this.ModLoader.logger.error(error.message);
             return Buffer.alloc(1);
@@ -419,7 +415,7 @@ class oot_equipment_tester implements IPlugin {
 
                                 writeFileSync(writePath, buf, "binary");
                                 this.ModLoader.logger.debug("Saved equipment zobj to " + writePath);
-                            } catch (error) {
+                            } catch (error: any) {
                                 this.ModLoader.logger.error(error.message);
                             }
                         }
